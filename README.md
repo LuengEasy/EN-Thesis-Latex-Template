@@ -1,18 +1,9 @@
-# English Thesis Template / 英語論文テンプレート
-
-## English
+# English Thesis Template
 
 ### Overview
 
-This repository provides a LaTeX template for an English master's thesis based on `ujreport`.
-It is configured for `uplatex + dvipdfmx` and includes a title page, abstract, table of contents, main chapters, acknowledgements, references, and a research achievements page.
-
-### For Overleaf
-
-Download the tex zip and upload into overleaf.Change settings as following:  
-- Main document: `main.tex`
-- Compiler: `LaTex`
-- TeX Live Version: `2025`
+This repository provides a LaTeX template for an English master's thesis based on `bxjsreport`.
+It is configured for `xelatex` and includes a title page, abstract, table of contents, main chapters, acknowledgements, references, and a research achievements page.
 
 ### File Structure
 
@@ -23,25 +14,41 @@ Download the tex zip and upload into overleaf.Change settings as following:
 - `rm2c_junsrt.bst`: Bibliography style file.
 - `latexmkrc`: Build configuration for `latexmk`.
 - `figures/`: Directory for figures and images.
+- `fonts/`: Optional local fonts. Put `CENTURY.TTF` here if you need the exact Century font.
 - `build/`: Output directory for auxiliary files and the generated PDF.
 
 ### Requirements
 
 Please make sure the following tools are available in your TeX environment:
 
-- `uplatex`
-- `dvipdfmx`
+- `xelatex`
 - `upbibtex`
 - `latexmk`
 
 This template was prepared for a TeX Live environment.
+
+### Fonts
+
+The template tries to use Century in the following order:
+
+1. `fonts/CENTURY.TTF`
+2. `C:/Windows/Fonts/CENTURY.TTF`
+3. `TeX Gyre Schola`
+
+The repository does not include `CENTURY.TTF`. If you need exact Century output, add the font file yourself at:
+
+```text
+fonts/CENTURY.TTF
+```
+
+Reference entries use Times New Roman when it is available. If the font is not available, the template falls back to `TeX Gyre Termes` so Overleaf can still compile.
 
 ### How to Compile
 
 Compile the thesis from the project root:
 
 ```bash
-latexmk -pdfdvi main.tex
+latexmk -pdf main.tex
 ```
 
 The generated PDF will be placed here:
@@ -62,21 +69,33 @@ To clean almost everything including the generated PDF:
 latexmk -C
 ```
 
+### Overleaf
+
+Set the Overleaf compiler to **XeLaTeX**. The template compiles without uploading Century because it falls back to `TeX Gyre Schola`.
+
+For exact Century output on Overleaf, upload the font file as:
+
+```text
+fonts/CENTURY.TTF
+```
+
+The file name is case-sensitive on Overleaf, so `CENTURY.TTF` must match exactly.
+
 ### How to Edit the Thesis
 
 #### 1. Update Thesis Information
 
 Edit the metadata in `main.tex`:
 
-- `\年度{...}`
-- `\学位種別{...}`
-- `\題目{...}`
-- `\指導教員{...}`
-- `\所属一行目{...}`
-- `\所属二行目{...}`
-- `\所属三行目{...}`
-- `\学籍番号{...}`
-- `\氏名{...}`
+- `\thesisyear{...}`
+- `\thesisdegree{...}`
+- `\thesistitle{...}`
+- `\thesissupervisor{...}`
+- `\affiliationlineone{...}`
+- `\affiliationlinetwo{...}`
+- `\affiliationlinethree{...}`
+- `\studentid{...}`
+- `\studentname{...}`
 
 #### 2. Write the Abstract
 
@@ -141,7 +160,7 @@ Edit the research achievements section in `main.tex` under:
 \section*{Research Achievements}
 ```
 
-The current template uses plain list items without numbering.
+The current template uses numbered list items in `1.`, `2.`, `3.` order.
 The command below can be used to underline your own name:
 
 ```tex
@@ -174,182 +193,3 @@ Example:
 - The template is currently set up for English thesis writing.
 - The title page labels and some structural names are customized in `English_thesis.sty`.
 - `Acknowledgements`, `References`, and `Research Achievements` are included in the table of contents manually.
-
----
-
-## 日本語
-
-### 概要
-
-このリポジトリは、`ujreport` をベースにした英語修士論文用の LaTeX テンプレートです。
-`uplatex + dvipdfmx` でのコンパイルを前提としており、表紙、Abstract、目次、本文、謝辞、参考文献、研究業績ページを含みます。
-
-### OverLeafを利用する方
-
-Download the tex zip and upload into overleaf.Change settings as following:  
-- Main document: `main.tex`
-- Compiler: `LaTex`
-- TeX Live Version: `2025`
-
-### ファイル構成
-
-- `main.tex`: 論文全体のメインファイル
-- `body.tex`: 本文の章・節を書くファイル
-- `English_thesis.sty`: 表紙や体裁を定義するスタイルファイル
-- `references.bib`: BibTeX の文献データベース
-- `rm2c_junsrt.bst`: 参考文献スタイル
-- `latexmkrc`: `latexmk` 用のビルド設定
-- `figures/`: 図ファイルを置くディレクトリ
-- `build/`: 中間生成物と PDF の出力先
-
-### 必要環境
-
-以下のコマンドが利用できる TeX 環境を用意してください。
-
-- `uplatex`
-- `dvipdfmx`
-- `upbibtex`
-- `latexmk`
-
-TeX Live 環境での利用を想定しています。
-
-### コンパイル方法
-
-プロジェクトのルートで次のコマンドを実行してください。
-
-```bash
-latexmk -pdfdvi main.tex
-```
-
-生成された PDF は次に出力されます。
-
-```text
-build/main.pdf
-```
-
-補助ファイルのみ削除する場合:
-
-```bash
-latexmk -c
-```
-
-PDF を含めてほぼ全て削除する場合:
-
-```bash
-latexmk -C
-```
-
-### 論文の編集方法
-
-#### 1. 論文情報の編集
-
-`main.tex` 内の以下を編集してください。
-
-- `\年度{...}`
-- `\学位種別{...}`
-- `\題目{...}`
-- `\指導教員{...}`
-- `\所属一行目{...}`
-- `\所属二行目{...}`
-- `\所属三行目{...}`
-- `\学籍番号{...}`
-- `\氏名{...}`
-
-#### 2. Abstract の記入
-
-`main.tex` の `abstract` 環境を編集します。
-
-```tex
-\begin{abstract}
-...
-\keywords{
-...
-}
-\end{abstract}
-```
-
-#### 3. 本文の記入
-
-章・節の本文は `body.tex` を編集してください。
-
-例:
-
-```tex
-\chapter{Introduction}
-\section{Background}
-```
-
-#### 4. 参考文献の管理
-
-文献情報は `references.bib` に追加し、本文中で通常どおり引用してください。
-
-参考文献出力は `main.tex` の以下で設定しています。
-
-```tex
-\bibliographystyle{rm2c_junsrt}
-\bibliography{references}
-```
-
-一時的に参考文献出力を止めたい場合は、
-
-```tex
-\usebibliographytrue
-```
-
-を
-
-```tex
-\usebibliographyfalse
-```
-
-に変更してください。
-
-#### 5. 謝辞
-
-謝辞は `main.tex` の以下を編集してください。
-
-```tex
-\section*{Acknowledgements}
-```
-
-#### 6. 研究業績
-
-研究業績は `main.tex` の以下を編集してください。
-
-```tex
-\section*{Research Achievements}
-```
-
-現在のテンプレートでは、研究業績は番号なしのリスト形式になっています。
-自分の名前に下線を付けるには、次のコマンドを使えます。
-
-```tex
-\achievementauthor{Your Name}
-```
-
-例:
-
-```tex
-\item \achievementauthor{Your Name}, Coauthor, and Coauthor, ``Paper Title,'' ...
-```
-
-### 図の追加
-
-図ファイルは `figures/` に置き、必要に応じて読み込んでください。
-
-例:
-
-```tex
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=0.8\linewidth]{figures/example.pdf}
-    \caption{Example figure.}
-    \label{fig:example}
-\end{figure}
-```
-
-### 注意
-
-- このテンプレートは英語論文向けに調整されています。
-- 表紙のラベルや一部の体裁は `English_thesis.sty` で定義されています。
-- `Acknowledgements`、`References`、`Research Achievements` は手動で目次に追加しています。

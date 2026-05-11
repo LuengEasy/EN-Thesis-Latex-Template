@@ -1,39 +1,57 @@
 %%
 % English master's thesis template
 %%
-\documentclass[11pt]{ujreport}
-\usepackage[dvipdfmx,a4paper,textheight=23.7cm,top=3cm,left=3cm,right=3cm,headheight=14pt]{geometry}
+\documentclass[10pt,a4paper,xelatex,ja=minimal,nomag]{bxjsreport}
+\geometry{reset,a4paper,ignorehead,ignorefoot,top=3.5cm,bottom=3cm,left=3cm,right=3cm,headheight=14pt}
 
-\usepackage[dvipdfmx]{graphicx}
+\usepackage{graphicx}
 \usepackage{enumitem}
 \usepackage{url}
-\usepackage[dvipdfmx,hidelinks,plainpages=false,pdfpagelabels,hypertexnames=false]{hyperref}
-\usepackage{pxjahyper}
+\usepackage[hidelinks,plainpages=false,pdfpagelabels,hypertexnames=false]{hyperref}
 \hypersetup{
     colorlinks=false
 }
 \usepackage{amsmath}
-\usepackage{otf}
+\usepackage{fontspec}
 \usepackage{chngcntr}
-\renewcommand{\baselinestretch}{1.1}
+\renewcommand{\baselinestretch}{1.0}
+\setlength{\parindent}{10pt}
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{array}
 
+\newcommand{\setthesisfont}[2][]{%
+    \setmainfont{#2}[Ligatures=TeX,#1]%
+    \setsansfont{#2}[Ligatures=TeX,#1]%
+}
+\newcommand{\setthesisfontfile}[2][]{%
+    \setthesisfont[AutoFakeBold=2.0,AutoFakeSlant=0.2,#1]{#2}%
+}
+\IfFileExists{fonts/CENTURY.TTF}{%
+    \setthesisfontfile[Path={fonts/}]{CENTURY.TTF}%
+}{%
+    \IfFileExists{C:/Windows/Fonts/CENTURY.TTF}{%
+        \setthesisfontfile[Path={C:/Windows/Fonts/}]{CENTURY.TTF}%
+    }{%
+        \setthesisfont{TeX Gyre Schola}%
+    }%
+}
+
 \usepackage{English_thesis}
+\renewcommand{\appendixname}{Appendix}
 
 \newif\ifusebibliography
 \usebibliographytrue
 
-\年度{2026}
-\学位種別{MASTER’S THESIS}
-\題目{Thesis Title\\Subtitle}
-\指導教員{Supervisor}
-\所属一行目{Graduate School of Information Science and Engineering Ritsumeikan University}
-\所属二行目{MASTER’S PROGRAM}
-\所属三行目{MAJOR in Advanced Information Science and Engineering}
-\学籍番号{Student ID}
-\氏名{Name}
+\thesisyear{2026}
+\thesisdegree{MASTER'S THESIS}
+\thesistitle{Thesis Title\\Subtitle}
+\thesissupervisor{Supervisor}
+\affiliationlineone{Graduate School of Information Science and Engineering Ritsumeikan University}
+\affiliationlinetwo{MASTER'S PROGRAM}
+\affiliationlinethree{MAJOR in Advanced Information Science and Engineering}
+\studentid{Student ID}
+\studentname{Name}
 
 \makeatletter
 \setlength{\@fptop}{0pt}
@@ -86,11 +104,11 @@ Write your acknowledgements here.
 \addcontentsline{toc}{chapter}{Research Achievements}
 \section*{Research Achievements}
 
-\begin{list}{}{\setlength{\leftmargin}{0pt}\setlength{\itemindent}{0pt}\setlength{\itemsep}{6pt}}
+\begin{achievementlist}
     \item \achievementauthor{Author}, Coauthor, and Author, ``Title of the Journal Paper,'' \textit{Journal Name}, vol. x, no. x, pp. xx--xx, Year.
     \item \achievementauthor{Author}, Coauthor, and Author, ``Title of the Conference Paper,'' in \textit{Proceedings of Conference Name}, City, Country, Year, pp. xx--xx.
     \item \achievementauthor{Author}, Coauthor, and Author, ``Title of the Presentation,'' Name of Workshop or Symposium, City, Japan, Year.
-\end{list}
+\end{achievementlist}
 
 % Add appendices here if necessary.
 
