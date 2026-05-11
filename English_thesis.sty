@@ -1,19 +1,14 @@
 %       Thesis manuscript style file (English version)
 
-\def\年度#1{\gdef\@year{#1}}
-%\def\学期#1{\gdef\@semester{#1}}
-\def\題目#1{\gdef\@title{#1}}
-\def\指導教員#1{\gdef\@teacher{#1}}
-%\def\クラス#1{\gdef\@class{#1}}
-%\def\コース#1{\gdef\@course{#1}}
-\def\学位種別#1{\gdef\@degree{#1}}
-\def\所属一行目#1{\gdef\@affiliationlineone{#1}}
-\def\所属二行目#1{\gdef\@affiliationlinetwo{#1}}
-\def\所属三行目#1{\gdef\@affiliationlinethree{#1}}
-% \def\学科#1{\gdef\@faculty{#1}} % For students following the 2012 curriculum, record the department.
-% \def\回生#1{\gdef\@grade{#1}}
-\def\学籍番号#1{\gdef\@IDcode{#1}}
-\def\氏名#1{\gdef\@author{#1}}
+\def\thesisyear#1{\gdef\@year{#1}}
+\def\thesistitle#1{\gdef\@title{#1}}
+\def\thesissupervisor#1{\gdef\@teacher{#1}}
+\def\thesisdegree#1{\gdef\@degree{#1}}
+\def\affiliationlineone#1{\gdef\@affiliationlineone{#1}}
+\def\affiliationlinetwo#1{\gdef\@affiliationlinetwo{#1}}
+\def\affiliationlinethree#1{\gdef\@affiliationlinethree{#1}}
+\def\studentid#1{\gdef\@IDcode{#1}}
+\def\studentname#1{\gdef\@author{#1}}
 
 % If you want to change the font size of the whole document, adjust the font sizes in this block.
 % \renewcommand{\large}{\@setfontsize\large{12pt}{17pt}}
@@ -39,69 +34,108 @@
 \renewcommand{\listfigurename}{List of Figures}
 \renewcommand{\listtablename}{List of Tables}
 
+% Reference entries use Times New Roman when available, with an Overleaf-safe fallback.
+\IfFontExistsTF{Times New Roman}{%
+    \newfontfamily\thesisreferencesfont[Ligatures=TeX]{Times New Roman}%
+}{%
+    \newfontfamily\thesisreferencesfont[Ligatures=TeX]{TeX Gyre Termes}%
+}
+
 % Change the fonts and styles of chapter and section titles
 \usepackage{titlesec}
 % Change the chapter font and style
 \titleformat{\chapter}%
     [block]%
-    {\sffamily\bfseries\huge}%
+    {\sffamily\fontsize{16pt}{19.2pt}\selectfont}%
     {Chapter \thechapter}%
     {1.0em}%
-    {\rmfamily}%
+    {}%
 \titlespacing{\chapter}
     {0pt}%
+    {0pt}%
+    {9pt}%
+\titleformat{name=\chapter,numberless}%
+    [block]%
+    {\sffamily\fontsize{14pt}{16.8pt}\selectfont}%
+    {}%
+    {0pt}%
+    {}%
+\titlespacing{name=\chapter,numberless}
+    {0pt}%
+    {9pt}%
     {18pt}%
-    {34pt}%
 % Change the section font and style
 % \titleformat*{\section}{\Large\bfseries\sffamily}
 \titleformat{\section}%
     [block]%
-    {\sffamily\Large\bfseries}%
+    {\sffamily\fontsize{12pt}{14.4pt}\selectfont}%
     {\thesection}%
     {1.0em}%
-    {\rmfamily}%
+    {}%
+\titlespacing{\section}
+    {0pt}%
+    {9pt}%
+    {9pt}%
+\titleformat{name=\section,numberless}%
+    [block]%
+    {\sffamily\fontsize{14pt}{16.8pt}\selectfont}%
+    {}%
+    {0pt}%
+    {}%
+\titlespacing{name=\section,numberless}
+    {0pt}%
+    {0pt}%
+    {9pt}%
 % Change the subsection font and style
 % \titleformat*{\subsection}{\large\bfseries\sffamily}
 \titleformat{\subsection}%
     [block]%
-    {\sffamily\large\bfseries}%
+    {\sffamily\fontsize{10pt}{12pt}\selectfont}%
     {\thesubsection}%
     {1.0em}%
-    {\rmfamily}%
+    {}%
+\titlespacing{\subsection}
+    {0pt}%
+    {0pt}%
+    {0pt}%
 % Change the subsubsection font and style
 % \titleformat*{\subsubsection}{\normalsize\bfseries\sffamily}
 \titleformat{\subsubsection}%
     [block]%
-    {\sffamily\normalsize\bfseries}%
+    {\sffamily\fontsize{10pt}{12pt}\selectfont}%
     {\thesubsubsection}%
     {1.0em}%
-    {\rmfamily}%
+    {}%
+\titlespacing{\subsubsection}
+    {0pt}%
+    {0pt}%
+    {0pt}%
 
 % Change the fonts and styles of chapter and section titles in the table of contents
 \usepackage{titletoc}
 \titlecontents{chapter}
-[0em] % Left spacing
-{\vskip8pt\bfseries} % Executed before the entry
+[0pt] % Left spacing
+{\vskip9pt\fontsize{11pt}{12pt}\selectfont} % Executed before the entry
 % {\vskip8pt} % Executed before the entry
-{{\sffamily\thecontentslabel}\hspace{0.8em}}
+{{\thecontentslabel}\hspace{0.8em}}
 {\hspace{.0em}}
-{\hfill\contentspage}
+{\titlerule*[0.5em]{.}\contentspage}
 [\vskip 0pt] % Executed after the entry
 
 \titlecontents{section}
-[1.6em] % Left spacing
-{} % Executed before the entry
-{{\sffamily\thecontentslabel}\hspace{1.0em}}
+[10pt] % Left spacing
+{\fontsize{10pt}{12pt}\selectfont} % Executed before the entry
+{{\thecontentslabel}\hspace{1.0em}}
 {} % Format for unnumbered entries
-{\dotfill\contentspage}
+{\titlerule*[0.5em]{.}\contentspage}
 [\vskip 0pt] % Executed after the entry
 
 \titlecontents{subsection}
-[2.6em] % Left spacing
-{} % Executed before the entry
-{{\sffamily\thecontentslabel}\hspace{1.0em}}
+[20pt] % Left spacing
+{\fontsize{10pt}{12pt}\selectfont} % Executed before the entry
+{{\thecontentslabel}\hspace{1.0em}}
 {} % Format for unnumbered entries
-{\dotfill\contentspage}
+{\titlerule*[0.5em]{.}\contentspage}
 [\vskip 0pt] % Executed after the entry
 
 % \titlecontents{subsection}[2.7em]{\sffamily}
@@ -177,9 +211,9 @@
     \titlepage
     %\null\vfil
     \begin{flushleft}
-    % {\LARGE \bf Abstract}
-    {\Large \bf Abstract}
-    \end{flushleft}}
+    {\Large\bfseries Abstract}
+    \end{flushleft}
+    \par\indent\ignorespaces}
 
 \def\endabstract{
     \par
@@ -196,8 +230,31 @@
 
 \renewcommand{\bibname}{References}
 
+\newenvironment{achievementlist}[1][9]
+{\thesisreferencesfont
+  \list{\@arabic\c@enumiv.}%
+       {\settowidth\labelwidth{#1.}%
+        \setlength\leftmargin{21pt}%
+        \setlength\labelsep{\leftmargin}%
+        \addtolength\labelsep{-\labelwidth}%
+        \setlength\itemsep{-1.5pt}%
+        \setlength\parsep{0pt}%
+        \setlength\topsep{0pt}%
+        \setlength\partopsep{0pt}%
+        \setlength\baselineskip{16pt}%
+        \usecounter{enumiv}%
+        \let\p@enumiv\@empty
+        \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+  \sloppy
+  \clubpenalty4000
+  \@clubpenalty\clubpenalty
+  \widowpenalty4000%
+  \sfcode`\.\@m}
+ {\endlist}
+
 \renewenvironment{thebibliography}[1]
 {\section*{\bibname\@mkboth{\bibname}{\bibname}}%
+  \thesisreferencesfont
   \list{\@biblabel{\@arabic\c@enumiv}}%
        {\settowidth\labelwidth{\@biblabel{#1}}%
         \leftmargin\labelwidth
